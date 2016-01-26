@@ -1,0 +1,53 @@
+
+#include <Adafruit_NeoPixel.h>// Note : relier la masse de l'alim à la carte.
+#define PIN            2// sortie pin 2
+#define NUMPIXELS      18//défintion du nombre de LED
+
+int a;
+int b;
+int L = 0;    // % de temps où la LED est allumée
+int V = 5;    // intervalle de variation de la luminosité
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+int delayval = 50;// permet de définir le temps de défilement
+
+void setup() 
+{
+  pixels.begin();//lance la communication série
+}
+
+void loop() 
+{
+  
+    for (int a=17;a>-1;a--)
+    {
+    pixels.setPixelColor(a, pixels.Color(L,000,50));
+    pixels.show();
+    delay(50);
+    L=L+V;
+    
+    
+    if (L == 0 || L == 90)
+    {
+    V = -V ;
+    } 
+ 
+     
+    
+    pixels.setPixelColor(a, pixels.Color(L,000,50));
+    pixels.show();
+    delay(1);
+    }
+    delay(50);
+    
+    for (int a=0;a<NUMPIXELS;a++)
+    {
+    pixels.setPixelColor(a, pixels.Color(000,000,000));
+    pixels.show();
+    delay(delayval);
+    }
+    delay(50); 
+   
+    
+}
